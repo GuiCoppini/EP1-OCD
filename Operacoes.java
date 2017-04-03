@@ -48,18 +48,20 @@ public class Operacoes extends Conversoes {
     int[] converteParaBinario(int decimal) {
         String binaria = Integer.toBinaryString(decimal);
         return converteString(binaria);
-    }    
+    }
+    
     int[] converteString(String numero1) {
-        String conversao[] = numero1.split(" ");
+        String conversao[] = numero1.split("");
         int[] binario = new int[conversao.length];
         for (int i = 0; i < conversao.length; i++) {
             binario[i] = Integer.parseInt(conversao[i]);
         }
         return binario;
     }
-    void imprimeBinario(int[] binario){
-        for (int i = 1; i < binario.length; i++) {
-            System.out.println(binario[i]);
+    
+    void imprimeBinario(int[] binario) {
+        for (int i = 0; i < binario.length; i++) {
+            System.out.print(binario[i] + " ");
         }
     }
 }
