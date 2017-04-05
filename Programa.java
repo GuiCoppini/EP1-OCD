@@ -43,13 +43,28 @@ public class Programa {
                 operacoes.imprimeBinario(operacoes.somaBinarios(binario1, binario2));
                 break;
             case 2:
-                System.out.println("sub");
+                System.out.println("Subtracao");
+                System.out.println("Gostaria de subtrair qual dos dois numeros?" + "\n" + "1) Numero1 - Numero2" + "\n"
+                                   + "2) Numero2 - Numero1");
+                numeroEscolhido = Integer.parseInt(scan.next());
+                switch (numeroEscolhido) {
+                    case 1:
+                        operacoes.imprimeBinario(operacoes.subtracaoBinarios(binario1, binario2));
+                        break;
+                    case 2:
+                        operacoes.imprimeBinario(operacoes.subtracaoBinarios(binario2, binario1));
+                }
                 break;
             case 3:
                 System.out.println("mult");
                 break;
             case 4:
                 System.out.println("div");
+                // binario
+                // 1
+                // pelo
+                // 2
+                
                 break;
             default:
                 System.out.println("operacao invalida");

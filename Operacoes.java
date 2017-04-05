@@ -31,7 +31,7 @@ public class Operacoes extends Conversoes {
                 }
             }
         }
-        return resultado;
+        return corrige0(resultado);
         
     }
     
@@ -109,7 +109,6 @@ public class Operacoes extends Conversoes {
         binarioComSinal2 = complementoDe2(binarioComSinal2);
         subtracao = somaBinarios(binarioComSinal1, binarioComSinal2);
         if (subtracao[1] == 1) { // eh negativo, precisa de complemento de 2
-            
             subtracao[0] = 1;
             subtracao = complementoDe2(subtracao);
             
@@ -119,4 +118,22 @@ public class Operacoes extends Conversoes {
         return subtracao;
     }
     
+    private int[] corrige0(int[] binario) {
+        int j = 0;
+        for (int i = 0; i < binario.length; i++) {
+            if (binario[i] == 0) {
+                j++;
+            }
+            if (binario[i] == 1)
+                break;
+        }
+        if (j == binario.length)
+            return binario;
+        int[] binarioSem0 = new int[binario.length - j];
+        for (int i = 0; i < binarioSem0.length; i++) {
+            binarioSem0[i] = binario[j];
+            j++;
+        }
+        return binarioSem0;
+    }
 }
