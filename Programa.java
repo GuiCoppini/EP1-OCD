@@ -19,6 +19,8 @@ public class Programa {
                 binarioEmString2 = scan.nextLine();
                 binario1 = operacoes.converteString(binarioEmString1);
                 binario2 = operacoes.converteString(binarioEmString2);
+                binario1 = operacoes.corrige0(binario1);
+                binario2 = operacoes.corrige0(binario2);
                 break;
             case 2:
                 System.out.println("Insira o primeiro numero:");
@@ -40,7 +42,7 @@ public class Programa {
         switch (numeroOperacao) {
             case 1:
                 System.out.println("soma");
-                operacoes.imprimeBinario(operacoes.somaBinarios(binario1, binario2));
+                operacoes.imprimeBinario(operacoes.somaBinarios(binario1, binario2, false));
                 break;
             case 2:
                 System.out.println("Subtracao");

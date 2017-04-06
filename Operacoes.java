@@ -1,6 +1,6 @@
 public class Operacoes extends Conversoes {
     
-    int[] somaBinarios(int[] bin1, int[] bin2) {
+    int[] somaBinarios(int[] bin1, int[] bin2, boolean subtracao) {
         int[] resultado, binarioCorrigido;
         binarioCorrigido = igualaBits(bin1, bin2);
         if (bin1.length == bin2.length) {
@@ -8,6 +8,11 @@ public class Operacoes extends Conversoes {
             for (int i = resultado.length - 1; i > 0; i--) {
                 resultado[i] += bin1[i - 1] + bin2[i - 1];
                 if (resultado[i] >= 2) {
+                    if (i == 1) {
+                        if (subtracao == true) {
+                            resultado[i] = resultado[i] % 2;
+                        }
+                    }
                     resultado[i - 1] = resultado[i] / 2;
                     resultado[i] = resultado[i] % 2;
                 }
@@ -17,6 +22,10 @@ public class Operacoes extends Conversoes {
             for (int i = resultado.length - 1; i > 0; i--) {
                 resultado[i] += bin1[i - 1] + binarioCorrigido[i - 1];
                 if (resultado[i] >= 2) {
+                    if (i == 1)
+                        if (subtracao == true) {
+                            resultado[i] = resultado[i] % 2;
+                        }
                     resultado[i - 1] = resultado[i] / 2;
                     resultado[i] = resultado[i] % 2;
                 }
@@ -26,13 +35,16 @@ public class Operacoes extends Conversoes {
             for (int i = resultado.length - 1; i > 0; i--) {
                 resultado[i] += binarioCorrigido[i - 1] + bin2[i - 1];
                 if (resultado[i] >= 2) {
+                    if (i == 1)
+                        if (subtracao == true) {
+                            resultado[i] = resultado[i] % 2;
+                        }
                     resultado[i - 1] = resultado[i] / 2;
                     resultado[i] = resultado[i] % 2;
                 }
             }
         }
         return corrige0(resultado);
-        
     }
     
     int[] converteParaBinario(int decimal) {
@@ -63,12 +75,9 @@ public class Operacoes extends Conversoes {
                 binario[i] = 0;
             }
         }
-        binario[binario.length - 1]++;
-        if (binario[binario.length - 1] >= 2) {
-            binario[binario.length - 2] = binario[binario.length - 1] / 2;
-            binario[binario.length - 1] = binario[binario.length - 1] % 2;
-            
-        }
+        int[] numero1 = { 0, 1 };
+        
+        binario = somaBinarios(binario, numero1, true);
         return binario;
     }
     
@@ -96,6 +105,16 @@ public class Operacoes extends Conversoes {
     public int[] subtracaoBinarios(int[] binario1, int[] binario2) {
         // binario1 - binario2, ja definido pelo usuario
         // binario2 negativo.
+        if (numerosIguais(comparaMaior(binario1, binario2), binario1) == true) {
+            int[] aux;
+            aux = binario1;
+            binario1 = binario2;
+            binario2 = aux;
+        }
+        int[] resultado = { 0 };
+        if (numerosIguais(binario1, binario2) == true) {
+            return resultado;
+        }
         int[] binarioComSinal1, binarioComSinal2, subtracao;
         binarioComSinal1 = new int[binario1.length + 1];
         binarioComSinal2 = new int[binario2.length + 1];
@@ -107,18 +126,37 @@ public class Operacoes extends Conversoes {
             binarioComSinal2[i + 1] = binario2[i];
         }
         binarioComSinal2 = complementoDe2(binarioComSinal2);
-        subtracao = somaBinarios(binarioComSinal1, binarioComSinal2);
-        if (subtracao[1] == 1) { // eh negativo, precisa de complemento de 2
-            subtracao[0] = 1;
+        subtracao = somaBinarios(binarioComSinal1, binarioComSinal2, true);
+        if (subtracao[0] == 1)
             subtracao = complementoDe2(subtracao);
-            
-        } else if (subtracao[0] == 1) {
-            subtracao[0] = 0;
-        }
-        return subtracao;
+        return corrige0(subtracao);
     }
     
-    private int[] corrige0(int[] binario) {
+    private boolean numerosIguais(int[] binario1, int[] binario2) {
+        if (comparaMaior(binario1, binario2) != null)
+            return false;
+        for (int i = 0; i < min(binario1.length, binario2.length); i++) {
+            if (binario1[i] != binario2[i])
+                return false;
+        }
+        return true;
+    }
+    
+    private int[] comparaMaior(int[] binario1, int[] binario2) {
+        if (binario1.length > binario2.length) {
+            return binario1;
+        } else if (binario2.length > binario1.length)
+            return binario2;
+        for (int i = 0; i < min(binario1.length, binario2.length); i++) {
+            if (binario1[i] == 0 && binario2[i] == 1) {
+                return binario2;
+            } else if (binario2[i] == 0 && binario1[i] == 1)
+                return binario1;
+        }
+        return null; // sao iguais
+    }
+    
+    public int[] corrige0(int[] binario) {
         int j = 0;
         for (int i = 0; i < binario.length; i++) {
             if (binario[i] == 0) {
