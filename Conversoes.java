@@ -8,8 +8,8 @@ public class Conversoes {
         if(a<b) return a;
         return b;
     }
-	
-	public static int[] corrige0(int[] binario) {
+    
+    public static int[] corrige0(int[] binario) {
         int j = 0;
         for (int i = 0; i < binario.length; i++) {
             if (binario[i] == 0) {
@@ -27,8 +27,8 @@ public class Conversoes {
         }
         return binarioSem0;
     }
-	
-	public static int[] igualaBits(int[] bin1, int[] bin2) {
+    
+    public static int[] igualaBits(int[] bin1, int[] bin2) {
         int[] binarioCorrigido;
         
         if (max(bin1.length, bin2.length) == bin1.length) {
@@ -48,22 +48,22 @@ public class Conversoes {
         }
         return binarioCorrigido;
     }
-	
-	 public static int[] comparaMaior(int[] binario1, int[] binario2) {
+    
+    public static int[] comparaMaior(int[] binario1, int[] binario2) {
         if (binario1.length > binario2.length) {
             return binario1;
         } else if (binario2.length > binario1.length)
-            return binario2;
+        return binario2;
         for (int i = 0; i < min(binario1.length, binario2.length); i++) {
             if (binario1[i] == 0 && binario2[i] == 1) {
                 return binario2;
             } else if (binario2[i] == 0 && binario1[i] == 1)
-                return binario1;
+            return binario1;
         }
         return null; // sao iguais
     }
-	
-	public static boolean numerosIguais(int[] binario1, int[] binario2) {
+    
+    public static boolean numerosIguais(int[] binario1, int[] binario2) {
         if (comparaMaior(binario1, binario2) != null)
             return false;
         for (int i = 0; i < min(binario1.length, binario2.length); i++) {
@@ -72,16 +72,16 @@ public class Conversoes {
         }
         return true;
     }
-	
-	public static boolean verificaZero(int[] resto) {
+    
+    public static boolean verificaZero(int[] resto) {
         for (int i = 0; i < resto.length; i++) {
             if (resto[i] == 1)
                 return false;
         }
         return true;
     }
-	
-	public static int[] converteParaBinario(int decimal) {
+    
+    public static int[] converteParaBinario(int decimal) {
         String binaria = Integer.toBinaryString(decimal);
         return converteString(binaria);
     }
