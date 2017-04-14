@@ -61,7 +61,8 @@ public class Programa {
                 System.out.println("mult");
                 break;
             case 4:
-                System.out.println("div");
+                System.out.println("Divisao");
+                System.out.println("Primeira linha mostra o resto, a segunda o quociente:");operacoes.imprimeBinario(operacoes.divisaoBinario(binario1, binario2));
                 // binario
                 // 1
                 // pelo

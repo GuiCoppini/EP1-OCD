@@ -64,7 +64,7 @@ public class Operacoes extends Conversoes {
     void imprimeBinario(int[] binario) {
         for (int i = 0; i < binario.length; i++) {
             System.out.print(binario[i] + " ");
-        }
+        }System.out.println();
     }
     
     int[] complementoDe2(int[] binario) {
@@ -105,15 +105,16 @@ public class Operacoes extends Conversoes {
     public int[] subtracaoBinarios(int[] binario1, int[] binario2) {
         // binario1 - binario2, ja definido pelo usuario
         // binario2 negativo.
+        int[] resultado = { 0 };
+        if (numerosIguais(binario1, binario2) == true) {
+            return resultado;
+        }
+        
         if (numerosIguais(comparaMaior(binario1, binario2), binario1) == true) {
             int[] aux;
             aux = binario1;
             binario1 = binario2;
             binario2 = aux;
-        }
-        int[] resultado = { 0 };
-        if (numerosIguais(binario1, binario2) == true) {
-            return resultado;
         }
         int[] binarioComSinal1, binarioComSinal2, subtracao;
         binarioComSinal1 = new int[binario1.length + 1];
@@ -173,5 +174,37 @@ public class Operacoes extends Conversoes {
             j++;
         }
         return binarioSem0;
+    }
+    
+    public int[] divisaoBinario(int[] dividendo, int[] divisor) {
+        if(verificaZero(divisor) == true)
+            return null;
+        if (comparaMaior(dividendo, divisor) == divisor)
+            return null;
+        int[] resto, antecessor;
+        int[] numero1 = { 1 };
+        int[] quociente = { 0 };
+        resto = subtracaoBinarios(dividendo, divisor);
+        quociente = somaBinarios(quociente, numero1, false);
+        while (verificaZero(resto) == false && comparaMaior(resto, divisor) == resto) {
+            quociente = somaBinarios(quociente, numero1, false);
+            resto = subtracaoBinarios(resto, divisor);
+            if (comparaMaior(resto, divisor) == divisor)
+                resto = somaBinarios(resto, divisor, false);
+        }
+        if (comparaMaior(resto, divisor) == null) {
+            resto = subtracaoBinarios(resto, divisor);
+            quociente = somaBinarios(quociente, numero1, false);
+        }
+        imprimeBinario(resto);
+        return quociente;
+    }
+    
+    private boolean verificaZero(int[] resto) {
+        for (int i = 0; i < resto.length; i++) {
+            if (resto[i] == 1)
+                return false;
+        }
+        return true;
     }
 }
