@@ -1,15 +1,17 @@
-public class Conversoes {
-    public static int max(int a, int b){
-        if(a>b) return a;
+public class Aux {
+    public static int max(int a, int b) {
+        if (a > b)
+            return a;
         return b;
     }
-
-    public static int min(int a, int b){
-        if(a<b) return a;
+    
+    public static int min(int a, int b) {
+        if (a < b)
+            return a;
         return b;
     }
-	
-	public static int[] corrige0(int[] binario) {
+    
+    public static int[] corrige0(int[] binario) {
         int j = 0;
         for (int i = 0; i < binario.length; i++) {
             if (binario[i] == 0) {
@@ -27,8 +29,8 @@ public class Conversoes {
         }
         return binarioSem0;
     }
-	
-	public static int[] igualaBits(int[] bin1, int[] bin2) {
+    
+    public static int[] igualaBits(int[] bin1, int[] bin2) {
         int[] binarioCorrigido;
         
         if (max(bin1.length, bin2.length) == bin1.length) {
@@ -48,8 +50,8 @@ public class Conversoes {
         }
         return binarioCorrigido;
     }
-	
-	 public static int[] comparaMaior(int[] binario1, int[] binario2) {
+    
+    public static int[] comparaMaior(int[] binario1, int[] binario2) {
         if (binario1.length > binario2.length) {
             return binario1;
         } else if (binario2.length > binario1.length)
@@ -62,8 +64,8 @@ public class Conversoes {
         }
         return null; // sao iguais
     }
-	
-	public static boolean numerosIguais(int[] binario1, int[] binario2) {
+    
+    public static boolean numerosIguais(int[] binario1, int[] binario2) {
         if (comparaMaior(binario1, binario2) != null)
             return false;
         for (int i = 0; i < min(binario1.length, binario2.length); i++) {
@@ -72,16 +74,16 @@ public class Conversoes {
         }
         return true;
     }
-	
-	public static boolean verificaZero(int[] resto) {
+    
+    public static boolean verificaZero(int[] resto) {
         for (int i = 0; i < resto.length; i++) {
             if (resto[i] == 1)
                 return false;
         }
         return true;
     }
-	
-	public static int[] converteParaBinario(int decimal) {
+    
+    public static int[] converteParaBinario(int decimal) {
         String binaria = Integer.toBinaryString(decimal);
         return converteString(binaria);
     }
@@ -93,5 +95,26 @@ public class Conversoes {
             binario[i] = Integer.parseInt(conversao[i]);
         }
         return binario;
+    }
+    
+    public static int[] moveParaDireita(int[] binario) {
+        // funcao para ser usada no metodo Booth, para andar com vetor a
+        // direita, copiando a primeira casa e descartando a ultima
+        int[] novoBinario = new int[binario.length];
+        int controlador = binario.length - 2;
+        for (int i = novoBinario.length - 1; i > 0; i--) {
+            novoBinario[i] = binario[controlador];
+            controlador--;
+        }
+        novoBinario[0] = binario[0];
+        return novoBinario;
+    }
+    
+    public static int[] corrigePrimeiraCasa(int[] resultado) {
+        int[] novoResultado = new int[resultado.length - 1];
+        for (int i = 0; i < novoResultado.length; i++) {
+            novoResultado[i] = resultado[i + 1];
+        }
+        return novoResultado;
     }
 }
