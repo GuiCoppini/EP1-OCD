@@ -17,18 +17,18 @@ public class Programa {
                 binarioEmString1 = scan.nextLine();
                 System.out.println("insira o segundo numero em binario");
                 binarioEmString2 = scan.nextLine();
-                binario1 = operacoes.converteString(binarioEmString1);
-                binario2 = operacoes.converteString(binarioEmString2);
-                binario1 = operacoes.corrige0(binario1);
-                binario2 = operacoes.corrige0(binario2);
+                binario1 = Conversoes.converteString(binarioEmString1);
+                binario2 = Conversoes.converteString(binarioEmString2);
+                binario1 = Conversoes.corrige0(binario1);
+                binario2 = Conversoes.corrige0(binario2);
                 break;
             case 2:
                 System.out.println("Insira o primeiro numero:");
                 decimal1 = Integer.parseInt(scan.nextLine());
-                binario1 = operacoes.converteParaBinario(decimal1);
+                binario1 = Conversoes.converteParaBinario(decimal1);
                 System.out.println("Segundo numero: ");
                 decimal2 = Integer.parseInt(scan.nextLine());
-                binario2 = operacoes.converteParaBinario(decimal2);
+                binario2 = Conversoes.converteParaBinario(decimal2);
                 break;
             default:
                 System.out.println("operacao invalida.");
