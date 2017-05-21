@@ -167,6 +167,13 @@ public class Operacoes extends Aux {
             }
             comprimento--;
         }
-        return corrige0(produto);
+        return corrige0(removeZeroAdireita(produto));
+    }
+    int[] removeZeroAdireita(int[] vetor){
+        int[] novoVetor = new int[vetor.length-1];
+        for (int i = 0; i < novoVetor.length; i++) {
+            novoVetor[i] = vetor[i];
+        }
+        return novoVetor;
     }
 }
